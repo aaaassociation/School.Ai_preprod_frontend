@@ -1,0 +1,141 @@
+/* AITeacherInputPage.module.css */
+
+.sectionPadding {
+  padding: 60px 0;
+}
+
+.bgCover {
+  background-image: url('../assets/images/all-img/section-bg-16.png');
+  background-size: cover;
+}
+
+.bgNoRepeat {
+  background-repeat: no-repeat;
+}
+
+.bgCenter {
+  background-position: center;
+}
+
+.minHScreen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.itemsCenter {
+  align-items: center;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.bgWhite {
+  background-color: white;
+}
+
+.shadowBox5 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.p8 {
+  padding: 32px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btnPrimary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.btnPrimary:disabled {
+  background-color: #007bff;
+  opacity: 0.65;
+}
+
+.wFull {
+  width: 100%;
+}
+
+.mt4 {
+  margin-top: 16px;
+}
+
+.mb6 {
+  margin-bottom: 24px;
+}
+
+.text3xl {
+  font-size: 1.875rem;
+}
+
+.fontBold {
+  font-weight: 700;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.p4 {
+  padding: 16px;
+}
+
+.border {
+  border: 1px solid #ddd;
+}
+
+.roundedMd {
+  border-radius: 4px;
+}
+
+.focusOutlineNone:focus {
+  outline: none;
+}
+
+.focusRing2:focus {
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+.focusRingPrimary:focus {
+  border-color: #007bff;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #007bff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

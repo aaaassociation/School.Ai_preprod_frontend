@@ -1,1 +1,1 @@
-# School.Ai_preprod_frontend
+# schoolai_frontend
