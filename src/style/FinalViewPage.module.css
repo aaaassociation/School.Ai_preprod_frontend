@@ -1,0 +1,179 @@
+.sectionPadding {
+  padding: 40px;
+}
+
+.bgCover {
+  background-size: cover;
+}
+
+.bgNoRepeat {
+  background-repeat: no-repeat;
+}
+
+.bgCenter {
+  background-position: center;
+}
+
+.minHScreen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.itemsCenter {
+  align-items: center;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.container {
+  max-width: 800px; /* Adjusted for a more narrow layout */
+  width: 100%;
+  position: relative;
+}
+
+.bgWhite {
+  background-color: #fff;
+}
+
+.shadowBox5 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.p8 {
+  padding: 32px;
+}
+
+.finalViewHeader {
+  margin-bottom: 20px;
+}
+
+.text4xl {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  color: #000; /* Black text color */
+}
+
+.primaryColor {
+  color: #000; /* Primary color matching the design */
+}
+
+.chapterSection {
+  margin-bottom: 20px;
+}
+
+.chapterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chapterTitle {
+  color: #007bff;
+  font-size: 1.25rem; /* Adjusted font size */
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.chaptersContainer {
+  margin-top: 20px;
+}
+
+.subchaptersContainer {
+  margin-top: 10px;
+  padding-left: 20px; /* Indent subchapters */
+}
+
+.subchapter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.125rem; /* Adjusted font size */
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.toggleButton {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.toggleButton:focus {
+  outline: none;
+}
+
+.loadingSpinner {
+  border: 3px solid #007bff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+  animation: spin 1s linear infinite;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-color: #28a745;
+  position: relative;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btnPrimary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.mt4 {
+  margin-top: 16px;
+}
+
+.wFull {
+  width: 100%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
