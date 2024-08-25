@@ -71,7 +71,7 @@ const ExamPage = () => {
       const fetchExamQuestions = async () => {
         setIsLoading(true);
         try {
-          const response = await fetch('http://localhost:5000/generate-exam', {
+          const response = await fetch('http://137.184.193.15:5000/generate-exam', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ const ExamPage = () => {
   const handleSubmitExam = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/evaluate-exam', {
+      const response = await fetch('http://137.184.193.15:5000/evaluate-exam', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

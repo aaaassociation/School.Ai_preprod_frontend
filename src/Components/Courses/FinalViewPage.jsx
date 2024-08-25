@@ -27,7 +27,7 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
 
   const fetchContent = async (chapterName, subchapterName) => {
     try {
-      const response = await fetch('http://localhost:5000/generate-content', {
+      const response = await fetch('http://137.184.193.15:5000/generate-content', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
 
   const handleStartCourse = async () => {
     try {
-      const response = await fetch('http://localhost:5000/save-course-data', {
+      const response = await fetch('http://137.184.193.15:5000/save-course-data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

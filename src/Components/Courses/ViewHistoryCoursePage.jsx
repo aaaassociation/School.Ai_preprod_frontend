@@ -154,7 +154,7 @@ const ViewHistoryCoursePage = () => {
   const handleDigDeeper = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/dig-deeper', {
+      const response = await fetch('http://137.184.193.15:5000/dig-deeper', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -159,17 +159,17 @@ const CourseContentPage = () => {
   };
 
   const handleExplainClick = () => {
-    handleVoiceGenerate('http://localhost:5000/generate-explanation', prompt);
+    handleVoiceGenerate('http://137.184.193.15:5000/generate-explanation', prompt);
   };
 
   const handleAskQuestionClick = () => {
-    handleVoiceGenerate('http://localhost:5000/ask-question', questionText);
+    handleVoiceGenerate('http://137.184.193.15:5000/ask-question', questionText);
   };
 
   const handleDigDeeper = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/dig-deeper', {
+      const response = await fetch('http://137.184.193.15:5000/dig-deeper', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
