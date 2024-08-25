@@ -1,0 +1,368 @@
+/* General Page Styling */
+.sectionPadding {
+  padding: 3rem;
+}
+
+.bgCover {
+  background-image: url('../assets/images/all-img/section-bg-1.png');
+  background-size: cover;
+  background-attachment: fixed; /* Adds a parallax effect */
+}
+
+.bgNoRepeat {
+  background-repeat: no-repeat;
+}
+
+.bgCenter {
+  background-position: center;
+}
+
+.minHScreen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.itemsCenter {
+  align-items: center;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+/* Table of Contents (TOC) Styling */
+.toc {
+  flex: 1;
+  padding: 2rem;
+  background: #f4f4f4;
+  border-right: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.chapterTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+  color: #0056b3;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.chapterTitle:hover {
+  color: #00376b;
+}
+
+.chapterList {
+  list-style: none;
+  padding: 0;
+}
+
+.chapterItem {
+  padding: 0.75rem 0;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-size: 1.125rem;
+  border-radius: 6px;
+}
+
+.chapterItem:hover {
+  background: #e0e0e0;
+  transform: scale(1.02);
+}
+
+/* Course Content Styling */
+.courseContentPage {
+  flex: 3;
+  padding: 2.5rem;
+  margin-left: 2rem;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.text3xl {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  color: #333;
+}
+
+.fontBold {
+  font-weight: 700;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.currentChapterTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #007BFF;
+}
+
+.currentSubchapterTitle {
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+  color: #444;
+}
+
+.detailedContent {
+  font-size: 1.125rem;
+  line-height: 1.8rem;
+  color: #444;
+  margin-bottom: 2rem;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.concept {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: bold;
+  color: #333333;
+  background-color: #e6f7ff;
+  padding: 12px;
+  border-left: 4px solid #007BFF;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0056b3;
+  margin-bottom: 16px;
+}
+
+.subheading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #444444;
+  margin-bottom: 12px;
+}
+
+.emphasis {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: #333333;
+  margin-bottom: 16px;
+}
+
+.code {
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #282c34;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+
+pre {
+  white-space: pre-wrap; /* Ensures code wraps correctly */
+}
+
+code {
+  display: block;
+  white-space: pre; /* Preserves whitespace and line breaks */
+}
+
+.image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.paragraph {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 16px;
+}
+
+/* Button Styling */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-right: 15px; /* Adds consistent spacing between buttons */
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btnPrimary {
+  background-color: #007BFF;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.btnSecondary {
+  background-color: #6c757d;
+}
+
+.btnSecondary:hover {
+  background-color: #5a6268;
+}
+
+.btnSuccess {
+  background-color: #28a745;
+}
+
+.btnSuccess:hover {
+  background-color: #218838;
+}
+
+.btnWarning {
+  background-color: #ffc107;
+}
+
+.btnWarning:hover {
+  background-color: #e0a800;
+}
+
+.mt4 {
+  margin-top: 2rem;
+}
+
+/* Align buttons horizontally */
+.buttonGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* New Styling for Voice Options Section */
+.voiceOptionsContainer {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.teacherImage {
+  width: 300px; /* Increased the size of the teacher image */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.voiceButtons {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.voiceButtons button {
+  margin-bottom: 10px;
+}
+
+/* Question Input Styling */
+.questionInput {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.questionInput:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Loading Spinner */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007BFF;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.paginationBtn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.paginationBtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.pageInfo {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #444;
+}
