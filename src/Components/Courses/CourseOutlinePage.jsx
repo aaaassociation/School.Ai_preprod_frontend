@@ -14,7 +14,7 @@ const CourseOutlinePage = ({ setChapters }) => {
   const fetchOutline = async (retryCount = 3) => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/generate-chapters', {
+      const response = await fetch('http://137.184.193.15:5000/generate-chapters', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -29,7 +29,7 @@ const GenerateVideoCourse = () => {
     setIsLoadingImage(true);
     setGeneratedImage(null);
     try {
-      const response = await fetch('http://localhost:5000/generate-teacher', {
+      const response = await fetch('http://137.184.193.15:5000/generate-teacher', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ const GenerateVideoCourse = () => {
     setIsLoadingVoice(true);
     const formData = new FormData(document.getElementById('voice-form'));
     try {
-      const response = await fetch('http://localhost:5000/generate-voice', {
+      const response = await fetch('http://137.184.193.15:5000/generate-voice', {
         method: 'POST',
         body: formData
       });
@@ -141,7 +141,7 @@ const GenerateVideoCourse = () => {
       audioFileData,
     };
 
-    const response = await fetch('http://localhost:5000/generate-avatar', {
+    const response = await fetch('http://137.184.193.15:5000/generate-avatar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

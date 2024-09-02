@@ -201,7 +201,7 @@ const ViewHistoryCoursePage = () => {
       const imageBlob = await fetch(teacherImage).then(res => res.blob());
       const imageBase64 = await convertImageToBase64(URL.createObjectURL(imageBlob));
 
-      const videoResponse = await fetch('http://localhost:5000/generate-avatar', {
+      const videoResponse = await fetch('http://137.184.193.15:5000/generate-avatar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -257,25 +257,25 @@ const ViewHistoryCoursePage = () => {
   };
 
   const handleExplainClick = () => {
-    handleVoiceGenerate('http://localhost:5000/generate-explanation', prompt);
+    handleVoiceGenerate('http://137.184.193.15:5000/generate-explanation', prompt);
   };
 
   const handleAskQuestionClick = () => {
-    handleVoiceGenerate('http://localhost:5000/ask-question', questionText, true);
+    handleVoiceGenerate('http://137.184.193.15:5000/ask-question', questionText, true);
   };
 
   const handleExplainVideoClick = () => {
-    handleVideoGenerate('http://localhost:5000/generate-explanation', prompt);
+    handleVideoGenerate('http://137.184.193.15:5000/generate-explanation', prompt);
   };
 
   const handleAskQuestionVideoClick = () => {
-    handleVideoGenerate('http://localhost:5000/ask-question', questionText, true);
+    handleVideoGenerate('http://137.184.193.15:5000/ask-question', questionText, true);
   };
 
   const handleDigDeeper = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/dig-deeper', {
+      const response = await fetch('http://137.184.193.15:5000/dig-deeper', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
