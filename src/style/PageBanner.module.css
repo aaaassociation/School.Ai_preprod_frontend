@@ -1,0 +1,18 @@
+/* Add this to your main stylesheet (e.g., styles.css or App.css) */
+
+.btn-outline-red {
+    display: inline-block;
+    padding: 10px 20px;
+    color: red;
+    border: 1px solid red;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btn-outline-red:hover {
+    background-color: rgb(221, 108, 108);
+    color: white;
+  }
+  

@@ -1,0 +1,180 @@
+.sectionPadding {
+  padding: 2rem;
+}
+
+.bgCover {
+  background-image: url('../assets/images/all-img/section-bg-12.png');
+  background-size: cover;
+}
+
+.bgNoRepeat {
+  background-repeat: no-repeat;
+}
+
+.bgCenter {
+  background-position: center;
+}
+
+.minHScreen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.itemsCenter {
+  align-items: center;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: #f9f9f9;
+}
+
+.text3xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  color: #333;
+}
+
+.fontBold {
+  font-weight: 700;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.mt4 {
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.btnPrimary {
+  background-color: #007BFF;
+}
+
+.btnSecondary {
+  background-color: #6c757d;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007BFF;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.question {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.questionText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.option input {
+  margin-right: 0.5rem;
+}
+
+.fillBlank {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.entryTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  margin: 0.5rem 0;
+}
+
+.results {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.correct {
+  color: #28a745;
+}
+
+.incorrect {
+  color: #dc3545;
+}
+
+.correctAnswer {
+  font-weight: bold;
+  color: #17a2b8;
+}
+
+.explanation {
+  font-style: italic;
+  color: #555;
+}
