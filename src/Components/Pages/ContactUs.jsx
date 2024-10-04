@@ -1,14 +1,11 @@
 import React from "react";
 import { call, mail, map } from "../../constant/images";
 import ContactForm from "../ContactForm";
-import Footer from "../Footer";
-import Header from "../Header";
 import PageBanner from "../PageBanner";
 
 const ContactUs = () => {
   return (
     <>
-      <Header />
       <PageBanner title={"Contact Us"} pageName="Contact" />
       <div class="nav-tab-wrapper tabs  section-padding">
         <div class="container">
@@ -66,7 +63,6 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

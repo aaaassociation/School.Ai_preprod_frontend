@@ -11,9 +11,11 @@ import Video from "../HomeTwoComponents/Video";
 import WhyChoose from "../HomeTwoComponents/WhyChoose";
 
 const HomeTwo = () => {
+
   useEffect(() => {
     document.documentElement.scrollTop = 0;
   }, []);
+
   return (
     <section className="font-gilroy font-medium text-gray text-lg leading-[27px]">
       <HomeTwoHeader />

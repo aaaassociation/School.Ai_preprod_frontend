@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../../style/FinalViewPage.module.css';
-import Header from '../Header';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import styles from '../../style/FinalViewPage.module.css';
 
-const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
+const FinalViewPage = ({ prompt, chapters, setContent, content, collectionId, setCollectionId }) => {
   const [userId, setUserId] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadingMessage, setLoadingMessage] = useState("Generating your course...");
-  const [completedChapters, setCompletedChapters] = useState(0);
+  const [subchapterCompletion, setSubchapterCompletion] = useState({});
+  const [showSubchapters, setShowSubchapters] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const auth = getAuth();
@@ -19,16 +18,17 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
         setUserId(user.uid);
       } else {
         console.log("User not signed in");
-        window.location.href = "/schoolai/login"; // Redirect to login if user is not authenticated
+        window.location.href = "/schoolai/login";
       }
     });
 
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   const fetchContent = async (chapterName, subchapterName) => {
     try {
-      const response = await fetch('http://137.184.193.15:5000/generate-content', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/generate-content`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -37,7 +37,8 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
           user_id: userId,
           chapter_name: chapterName,
           subchapter_name: subchapterName,
-          prompt
+          prompt,
+          voice_id: 'ErXwobaYiN019PkySvjV'
         })
       });
       if (!response.ok) {
@@ -48,7 +49,17 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
         ...prev,
         [`${chapterName}-${subchapterName}`]: data
       }));
-      setCompletedChapters(prev => prev + 1);
+
+      setSubchapterCompletion(prev => {
+        const updatedSubchapters = {
+          ...prev[chapterName],
+          [subchapterName]: true
+        };
+        return {
+          ...prev,
+          [chapterName]: updatedSubchapters
+        };
+      });
     } catch (error) {
       console.error('There was an error fetching the content:', error);
     }
@@ -57,45 +68,34 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
   useEffect(() => {
     if (chapters && userId) {
       const fetchAllContent = async () => {
-        const contentPromises = [];
         for (const [chapterName, subchapters] of Object.entries(chapters)) {
-          for (const subchapter of subchapters) {
-            contentPromises.push(fetchContent(chapterName, subchapter));
-          }
+          subchapters.forEach(subchapter => {
+            fetchContent(chapterName, subchapter);
+          });
         }
-        await Promise.all(contentPromises);
-        setIsLoading(false);
       };
 
       fetchAllContent();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prompt, chapters, setContent, userId]);
 
-  useEffect(() => {
-    if (isLoading) {
-      const messages = [
-        "AI is crafting your unique course...",
-        "Analyzing and organizing educational content...",
-        "Your course is almost ready...",
-        "Generating in-depth subject matter..."
-      ];
-      let index = 0;
-      const interval = setInterval(() => {
-        if (completedChapters < Object.keys(chapters).length) {
-          setLoadingMessage(`${messages[index]} (${completedChapters}/${Object.keys(chapters).length} chapters completed)`);
-        } else {
-          setLoadingMessage("All chapters generated. Finalizing your course...");
-        }
-        index = (index + 1) % messages.length;
-      }, 3000);
+  const toggleSubchaptersVisibility = (chapterName) => {
+    setShowSubchapters(prev => ({
+      ...prev,
+      [chapterName]: !prev[chapterName]
+    }));
+  };
 
-      return () => clearInterval(interval);
-    }
-  }, [isLoading, completedChapters, chapters]);
+  const areAllSubchaptersComplete = (chapterName) => {
+    const subchapters = subchapterCompletion[chapterName];
+    return subchapters && Object.keys(subchapters).length === chapters[chapterName].length && Object.values(subchapters).every(isComplete => isComplete);
+  };
 
   const handleStartCourse = async () => {
     try {
-      const response = await fetch('http://137.184.193.15:5000/save-course-data', {
+      setLoading(true);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/save-course-data`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -111,15 +111,70 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
         throw new Error('Failed to save course data');
       }
       const courseData = await response.json();
-      console.log("Course data saved successfully");
-
-      // Navigate to CourseContentPage with the saved course ID
-      const courseId = courseData.id; // Assuming the server returns the course ID
+      const courseId = courseData.course_data.id;
+      setLoading(false);
+      setCollectionId("");
       navigate(`/schoolai/coursecontent?courseId=${courseId}`);
     } catch (error) {
       console.error('Error saving course data:', error);
     }
   };
+
+  const handleStartLink = async (chapterName) => {
+    const filteredChapter = Object.keys(chapters)
+      .filter(key => key.includes(chapterName))
+      .reduce((obj, key) => {
+        obj[key] = chapters[key];
+        return obj;
+      }, {});
+    const filteredContent = Object.keys(content)
+      .filter(key => key.includes(chapterName))
+      .reduce((obj, key) => {
+        obj[key] = content[key];
+        return obj;
+      }, {});
+
+    if (!collectionId) {
+      const newTab = window.open();
+      newTab.document.title = "Loading ...";
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/save-course-data`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          input_data: prompt,
+          course_outline: filteredChapter,
+          course_content: filteredContent
+        })
+      });
+      if (response.ok) {
+        newTab.location.href = `${window.location.origin}/schoolai/coursecontent`;
+        const jsonData = await response.json();
+        setCollectionId(jsonData.course_data.id);
+      }
+    } else {
+      const newTab = window.open();
+      newTab.document.title = "Loading ...";
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/save-course-data`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: collectionId,
+          user_id: userId,
+          input_data: prompt,
+          course_outline: filteredChapter,
+          course_content: filteredContent
+        })
+      });
+      if (response.ok) {
+        newTab.location.href = `${window.location.origin}/schoolai/coursecontent`;
+      }
+    }
+  }
 
   const extractNumber = (str) => {
     const match = str.match(/\d+/);
@@ -132,7 +187,6 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
 
   return (
     <>
-      <Header />
       <div
         className={`${styles.sectionPadding} ${styles.bgCover} ${styles.bgNoRepeat} ${styles.bgCenter} ${styles.minHScreen} ${styles.flex} ${styles.itemsCenter} ${styles.justifyCenter}`}
         style={{ marginTop: '100px' }}
@@ -140,67 +194,55 @@ const FinalViewPage = ({ prompt, chapters, setContent, content }) => {
         <div className={`${styles.container} ${styles.bgWhite} ${styles.shadowBox5} ${styles.rounded} ${styles.p8}`}>
           <div className={styles.finalViewHeader}>
             <h1 className={`${styles.text4xl} ${styles.fontExtraBold} ${styles.textCenter} ${styles.primaryColor}`}>
-              Final View for "{prompt}"
+              {prompt}
             </h1>
+          </div>
+          <div className={styles.chaptersContainer}>
+            {Object.entries(chapters)
+              .sort(([a], [b]) => sortChaptersNumerically(a, b))
+              .map(([chapterName, subchapters], chapterIndex) => (
+                <div key={chapterIndex} className={styles.chapterSection}>
+                  <div className={styles.chapterHeader}>
+                    <h2 className={styles.chapterTitle} >
+                      <div
+                        onClick={() => { handleStartLink(chapterName) }}
+                        className={areAllSubchaptersComplete(chapterName) ? styles.activeLink : styles.disabledLink}
+                      >
+                        {chapterName}
+                      </div>
+                      <span className={areAllSubchaptersComplete(chapterName) ? styles.checkmark : styles.loadingSpinner}></span>
+                    </h2>
+                    <button
+                      className={styles.toggleButton}
+                      onClick={() => toggleSubchaptersVisibility(chapterName)}
+                    >
+                      {showSubchapters[chapterName] ? 'Hide' : 'Show'}
+                    </button>
+                  </div>
+                  {showSubchapters[chapterName] && (
+                    <div className={styles.subchaptersContainer}>
+                      {subchapters
+                        .sort((a, b) => sortChaptersNumerically(a, b))
+                        .map((subchapter, subchapterIndex) => (
+                          <div key={subchapterIndex} className={styles.subchapter}>
+                            <span>{subchapter}</span>
+                            <span className={content[`${chapterName}-${subchapter}`] ? styles.checkmark : styles.loadingSpinner}></span>
+                          </div>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              ))}
           </div>
           <button
             onClick={handleStartCourse}
             className={`${styles.btn} ${styles.btnPrimary} ${styles.mt4} ${styles.wFull}`}
-            disabled={isLoading}
+            disabled={!Object.keys(chapters).every(areAllSubchaptersComplete)}
           >
-            {isLoading ? 'Loading...' : 'Start Course'}
+            {!loading ? "Start Course" : <div className='flex justify-center items-center'>
+              <div className={styles.spinner}></div>
+            </div>}
           </button>
-          {isLoading ? (
-            <div className={styles.loadingContainer}>
-              <div className={styles.loadingBaton}></div>
-              <p className={styles.loadingText}>{loadingMessage}</p>
-            </div>
-          ) : (
-            <div className={styles.chaptersContainer}>
-              {Object.entries(chapters)
-                .sort(([a], [b]) => sortChaptersNumerically(a, b))
-                .map(([chapterName, subchapters], chapterIndex) => (
-                  <div
-                    key={chapterIndex}
-                    className={`${styles.chapterCard} ${styles.scrollableBox}`}
-                  >
-                    <img
-                      src="../assets/images/all-img/chapter-bg.png"
-                      alt="Background"
-                      className={styles.backgroundImage}
-                    />
-                    <div className={styles.overlay}></div>
-                    <div className="p-6 relative">
-                      <h2 className={`${styles.chapterTitle} ${styles.accentColor}`}>
-                        {chapterName}
-                      </h2>
-                      <div className={styles.subchaptersContainer}>
-                        {subchapters
-                          .sort((a, b) => sortChaptersNumerically(a, b))
-                          .map((subchapter, subchapterIndex) => (
-                            <div
-                              key={subchapterIndex}
-                              className={styles.subchapterCard}
-                            >
-                              <h3 className={`${styles.subchapterTitle} ${styles.subchapterAccentColor}`}>
-                                {`Course ${subchapterIndex + 1}: ${subchapter}`}
-                              </h3>
-                              <div
-                                className={`${styles.subchapterContent} ${styles.courseContent}`}
-                                dangerouslySetInnerHTML={{
-                                  __html:
-                                    content[`${chapterName}-${subchapter}`] ||
-                                    '<p>Loading...</p>',
-                                }}
-                              />
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          )}
         </div>
       </div>
     </>

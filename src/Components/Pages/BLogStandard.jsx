@@ -17,14 +17,11 @@ import {
   rc3,
   search,
 } from "../../constant/images";
-import Footer from "../Footer";
-import Header from "../Header";
 import PageBanner from "../PageBanner";
 
 const BLogStandard = () => {
   return (
     <>
-      <Header />
       <PageBanner title={"Blog Standard"} pageName={"Blog Standard"} />
       <div className="nav-tab-wrapper tabs  section-padding">
         <div className="container">
@@ -427,7 +424,6 @@ const BLogStandard = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

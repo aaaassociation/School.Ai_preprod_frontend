@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../style/ExamPage.module.css';
-import Header from '../Header';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../../config/firebase';
 import { collection, getDocs } from 'firebase/firestore';
@@ -71,7 +70,7 @@ const ExamPage = () => {
       const fetchExamQuestions = async () => {
         setIsLoading(true);
         try {
-          const response = await fetch('http://137.184.193.15:5000/generate-exam', {
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/generate-exam`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -102,7 +101,7 @@ const ExamPage = () => {
   const handleSubmitExam = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://137.184.193.15:5000/evaluate-exam', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/evaluate-exam`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -155,7 +154,7 @@ const ExamPage = () => {
       const parts = q.question.split('__blank__');
       return (
         <div key={index} className={styles.question}>
-          <p className={styles.questionText}>Problem {index + 1}: 
+          <p className={styles.questionText}>Problem {index + 1}:
             {parts[0]}
             <input
               type="text"
@@ -185,8 +184,7 @@ const ExamPage = () => {
 
   return (
     <>
-      <Header />
-      <div className={`${styles.sectionPadding} ${styles.bgCover} ${styles.bgNoRepeat} ${styles.bgCenter} ${styles.minHScreen} ${styles.flex} ${styles.itemsCenter} ${styles.justifyCenter}`} style={{marginTop:"100px"}}>
+      <div className={`${styles.sectionPadding} ${styles.bgCover} ${styles.bgNoRepeat} ${styles.bgCenter} ${styles.minHScreen} ${styles.flex} ${styles.itemsCenter} ${styles.justifyCenter}`} style={{ marginTop: "100px" }}>
         <div className={`${styles.container} ${styles.bgWhite} ${styles.shadowBox5} ${styles.rounded} ${styles.p8}`}>
           <h1 className={`${styles.text3xl} ${styles.fontBold} ${styles.textCenter}`}>Exam for {chapterName} - {subchapterName}</h1>
           {isLoading ? (

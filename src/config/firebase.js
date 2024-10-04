@@ -1,9 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
-import { getFirestore, collection, getDocs, doc, setDoc } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+// import { getFirestore, collection, getDocs, doc, setDoc } from 'firebase/firestore';
+// import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+// import firebase from 'firebase/app';
 
-import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import wfb from "../../assets/images/social/wfb.svg";
 import wt from "../../assets/images/social/wt.svg";
 import wi from "../../assets/images/social/w-i.svg";
@@ -14,6 +14,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const HomeTwoHeader = () => {
   const scrollNav = useRef(null);
+  const navigate = useNavigate();
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const { currentUser, logout } = useAuth();
@@ -24,12 +25,20 @@ const HomeTwoHeader = () => {
   };
 
   useEffect(() => {
-    // scrolling nav
-    window.addEventListener("scroll", () => {
-      let windowScroll = window.scrollY > 100;
-      scrollNav.current.classList.toggle("rt-sticky-active", windowScroll);
-    });
+    const handleScroll = () => {
+      if (scrollNav.current) {
+        let windowScroll = window.scrollY > 100;
+        scrollNav.current.classList.toggle("rt-sticky-active", windowScroll);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
 
   showSearchBar
     ? body.classList.add("modal-open")
@@ -96,22 +105,22 @@ const HomeTwoHeader = () => {
                   <ul className="menu-active-classNamees">
                     <li>
                       <Link to={"/schoolai/home"}>
-                      Home
+                        Home
                       </Link>
                     </li>
                     <li>
                       <Link to={"/schoolai/about"}>
-                      About
+                        About
                       </Link>
                     </li>
                     <li>
                       <Link to={"/schoolai/courses"}>
-                      Courses
+                        Courses
                       </Link>
                     </li>
                     <li>
                       <Link to={"/schoolai/blog-standard"}>
-                      Blog
+                        Blog
                       </Link>
                     </li>
                     <li>
@@ -204,9 +213,18 @@ const HomeTwoHeader = () => {
             content.
           </div>
           <div className="md:flex  md:space-x-4 space-y-3 md:space-y-0 pt-5">
-            <a href="/schoolai/login" className="btn btn-primary">
+            <div
+              className="btn btn-primary cursor-pointer"
+              onClick={() => {
+                if (currentUser !== null) {
+                  navigate("/schoolai/courses");
+                } else {
+                  navigate("/schoolai/login");
+                }
+              }}
+            >
               Get Started Now
-            </a>
+            </div>
           </div>
         </div>
         <div className="imge-box  hidden  xl:block absolute right-[-60px] top-1/2  -translate-y-1/2 mt-[60px]  ">

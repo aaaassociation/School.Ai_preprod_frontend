@@ -1,1 +1,1 @@
-# schoolai_frontend
+School AI Frontend

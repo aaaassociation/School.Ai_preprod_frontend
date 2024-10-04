@@ -45,17 +45,11 @@ const Header = () => {
 
   useEffect(() => {
     fetchCredits();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
   const scrollNav = useRef(null);
-  useEffect(() => {
-    // scrolling nav
-    window.addEventListener("scroll", () => {
-      let windowScroll = window.scrollY > 100;
-      scrollNav.current.classList.toggle("rt-sticky-active", windowScroll);
-      scrollNav.current.classList.toggle("sticky", windowScroll);
-    });
-  }, []);
+
 
   // Calculate remaining credits
   const remainingCredits = totalCredits - usedCredits;
@@ -98,7 +92,7 @@ const Header = () => {
                 <div className="flex-none flex space-x-[18px] items-center">
                   {currentUser ? (
                     <div className="hidden lg:flex items-center space-x-4">
-                      <Link 
+                      <Link
                         to="/schoolai/pricing"
                         className="flex items-center bg-gray-100 p-2 rounded-md cursor-pointer"
                       >

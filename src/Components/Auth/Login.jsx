@@ -36,7 +36,7 @@ const LoginPage = () => {
 
     setLoading(true);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
       setLoading(false);
       navigate("/schoolai/courses");
     } catch (error) {
@@ -99,7 +99,9 @@ const LoginPage = () => {
               className="w-full py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition duration-300"
               disabled={loading}
             >
-              {loading ? <div className="spinner"></div> : "Login"}
+              {loading ? <div className="flex justify-center items-center">
+                <div style={{ border: '4px solid rgba(0, 0, 0, 0.1)', borderLeftColor: '#007bff', borderRadius: '50%', width: '24px', height: '24px', animation: 'spin 1s linear infinite' }}></div>
+              </div> : "Login"}
             </button>
             {formErrors.submit && (
               <p className="text-red-500 text-sm mt-1">{formErrors.submit}</p>

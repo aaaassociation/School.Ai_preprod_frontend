@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../config/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { c1, c2, c3, c4, c5, c6, clock, file, star } from '../constant/images';
+import { c1, c2, c3, c4, c5, c6, file } from '../constant/images';
 import styles from '../style/PageBanner.module.css';
 import CourseOutline from './CourseOutline';
 
@@ -50,7 +50,6 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
           const timestampB = b.timestamp ? b.timestamp.seconds : 0;
           return timestampB - timestampA;
         });
-
         setCourses(fetchedCourses);
       } catch (error) {
         console.error('Error fetching documents:', error);
@@ -62,8 +61,8 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
     fetchData();
   }, [userId]);
 
-  const handleCourseClick = (inputData) => {
-    navigate(`/schoolai/viewhistorycourse/${encodeURIComponent(inputData)}`);
+  const handleCourseClick = (id) => {
+    navigate(`/schoolai/viewhistorycourse/${id}`);
   };
 
   const handleNewCourseClick = () => {
@@ -100,9 +99,9 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
               <Tab.List as="ul" id="tabs-nav" className="flex space-x-4 cata-Tabs">
                 {['clarity:grid-view-line', 'ant-design:unordered-list-outlined'].map((className, key) => (
                   <Tab as="li" className={({ selected }) => (selected ? "active" : "")} key={key}>
-                    <a href="#" className="h-[60px] w-[60px] flex flex-col justify-center items-center">
+                    <div className="h-[60px] w-[60px] flex flex-col justify-center items-center cursor-pointer">
                       <iconify-icon icon={className}></iconify-icon>
-                    </a>
+                    </div>
                   </Tab>
                 ))}
               </Tab.List>
@@ -112,7 +111,7 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
                     {courses.map((course, index) => (
                       <div
                         className="bg-white shadow-box2 rounded-[8px] transition duration-100 hover:shadow-sm cursor-pointer"
-                        onClick={() => handleCourseClick(course.input_data)}
+                        onClick={() => handleCourseClick(course.id)}
                         key={course.id}
                       >
                         <div className="course-thumb h-[248px] rounded-t-[8px] relative">
@@ -131,14 +130,14 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
                               <img src={file} alt="" />
                               <span>{Object.keys(JSON.parse(course.course_outline)).length} Chapters</span>
                             </span>
-                            <span className="flex items-center space-x-2 mr-3">
+                            {/* <span className="flex items-center space-x-2 mr-3">
                               <img src={clock} alt="" />
                               <span>{course.timestamp && course.timestamp.seconds ? new Date(course.timestamp.seconds * 1000).toLocaleDateString() : 'No Date'}</span>
-                            </span>
-                            <span className="flex items-center space-x-2">
+                            </span> */}
+                            {/* <span className="flex items-center space-x-2">
                               <img src={star} alt="" />
                               <span>5.0</span>
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                       </div>
@@ -150,7 +149,7 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
                     {courses.map((course, index) => (
                       <div
                         className="bg-white rounded-[8px] transition shadow-box7 duration-150 border-b-4 hover:border-primary border-transparent hover:shadow-box6 flex p-8 space-x-6 cursor-pointer"
-                        onClick={() => handleCourseClick(course.input_data)}
+                        onClick={() => handleCourseClick(course.id)}
                         key={course.id}
                       >
                         <div className="flex-none">
@@ -161,13 +160,13 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
                         <div className="course-content flex-1">
                           <div className="text-primary font-bold text-2xl mb-2 flex justify-between">
                             <span className="inline-block">{course.input_data}</span>
-                            <span className="flex space-x-1">
+                            {/* <span className="flex space-x-1">
                               {[...Array(4)].map((_, i) => (
                                 <span className="w-4 h-4 inline-block" key={i}>
                                   <img src={star} alt="" className="w-full h-full block object-cover" />
                                 </span>
                               ))}
-                            </span>
+                            </span> */}
                           </div>
                           <h4 className="text-2xl leading-[36px] mb-4 font-bold">
                             <CourseOutline outline={course.course_outline} />
@@ -177,10 +176,10 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
                               <img src="assets/images/svg/file2.svg" alt="" />
                               <span>{Object.keys(JSON.parse(course.course_outline)).length} Chapters</span>
                             </span>
-                            <span className="flex items-center space-x-2">
+                            {/* <span className="flex items-center space-x-2">
                               <img src="assets/images/svg/user2.svg" alt="" />
                               <span>4k Lesson</span>
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                       </div>
@@ -191,7 +190,9 @@ const FilteredCourse = ({ classNameForTabOne, classNameForTabTwo }) => {
             </Tab.Group>
           </div>
         ) : (
-          <p>No courses found.</p>
+          <div className="flex justify-center">
+            <p>No courses found.</p>
+          </div>
         )
       )}
     </>

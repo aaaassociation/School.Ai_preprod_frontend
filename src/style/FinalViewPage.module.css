@@ -3,7 +3,6 @@
 }
 
 .bgCover {
-  background-image: url('../assets/images/all-img/section-bg-12.png');
   background-size: cover;
 }
 
@@ -32,13 +31,14 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 800px;
+  /* Adjusted for a more narrow layout */
   width: 100%;
   position: relative;
 }
 
 .bgWhite {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #fff;
 }
 
 .shadowBox5 {
@@ -57,16 +57,114 @@
   margin-bottom: 20px;
 }
 
-.text3xl {
-  font-size: 2rem;
-}
-
-.fontBold {
+.text4xl {
+  font-size: 3rem;
   font-weight: bold;
+  text-align: center;
+  color: #000;
+  /* Black text color */
 }
 
-.textCenter {
-  text-align: center;
+.primaryColor {
+  color: #000;
+  /* Primary color matching the design */
+}
+
+.chapterSection {
+  margin-bottom: 20px;
+}
+
+.chapterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chapterTitle {
+  font-size: 1.25rem;
+  /* Adjusted font size */
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.disabledLink {
+  text-decoration: underline;
+  color: grey;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.activeLink {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #007bff
+}
+
+.chaptersContainer {
+  margin-top: 20px;
+}
+
+.subchaptersContainer {
+  margin-top: 10px;
+  padding-left: 20px;
+  /* Indent subchapters */
+}
+
+.subchapter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.125rem;
+  /* Adjusted font size */
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.toggleButton {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.toggleButton:focus {
+  outline: none;
+}
+
+.loadingSpinner {
+  border: 3px solid #007bff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+  animation: spin 1s linear infinite;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-color: #28a745;
+  position: relative;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2.5px;
+  width: 5.5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .btn {
@@ -79,9 +177,17 @@
   cursor: pointer;
 }
 
+.btn:disabled {
+  cursor: not-allowed
+}
+
 .btnPrimary {
   background-color: #007bff;
   color: #fff;
+}
+
+.btnPrimary:disabled {
+  background-color: #ccc;
 }
 
 .mt4 {
@@ -92,105 +198,21 @@
   width: 100%;
 }
 
-.loadingContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.loadingBaton {
-  border: 4px solid #007bff;
-  border-top: 4px solid transparent;
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #589ce6;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+  0% {
+    transform: rotate(0deg);
+  }
 
-.loadingText {
-  margin-top: 16px;
-  font-size: 1.125rem;
-  color: #333;
-}
-
-.chaptersContainer {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.chapterCard {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f0f8ff; /* Fresh light blue background */
-  padding: 16px;
-}
-
-.backgroundImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  opacity: 0.1;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5); /* Light overlay for readability */
-  z-index: 1;
-}
-
-.chapterTitle {
-  position: relative;
-  z-index: 2;
-  color: #007bff; /* Fresh blue color for the text */
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-}
-
-.subchaptersContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.subchapterCard {
-  position: relative;
-  z-index: 2;
-  background: #ffffff; /* White background for subchapter card */
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.subchapterTitle {
-  font-size: 1.125rem;
-  font-weight: bold;
-  color: #333; /* Darker color for better readability */
-}
-
-.subchapterContent {
-  max-height: 150px;
-  overflow-y: auto;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #f9f9f9; /* Light grey background for content */
+  100% {
+    transform: rotate(360deg);
+  }
 }

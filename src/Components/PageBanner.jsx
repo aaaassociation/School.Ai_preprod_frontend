@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "../style/PageBanner.module.css";
 
 const PageBanner = ({ pageName, pageTitle, num, title }) => {
   useEffect(() => {

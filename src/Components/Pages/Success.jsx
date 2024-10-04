@@ -27,11 +27,11 @@ const Success = () => {
           date: serverTimestamp(),
         };
 
-        if (amount == 5000) {
+        if (amount === 5000) {
           paymentData.credits = 1000;
-        } else if (amount == 10000) {
+        } else if (amount === 10000) {
           paymentData.credits = 2000;
-        } else if (amount == 50000) {
+        } else if (amount === 50000) {
           paymentData.credits = 10000;
         }
 

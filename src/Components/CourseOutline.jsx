@@ -7,7 +7,9 @@ const CourseOutline = ({ outline }) => {
     <div className="course-outline" style={{ marginBottom: '16px' }}>
       <style jsx>{`
         .course-outline .chapter-title {
-          white-space: nowrap;
+          display: -webkit-box;
+          -webkit-line-clamp: 1; /* Limits to 1 line */
+          -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
           font-size: 0.9rem; /* Equivalent to text-sm */

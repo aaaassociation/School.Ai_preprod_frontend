@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../style/GenerateVideoCourse.module.css';
-import Header from '../Header';
 
 const GenerateVideoCourse = () => {
   const [prompt, setPrompt] = useState('');
@@ -22,14 +21,14 @@ const GenerateVideoCourse = () => {
   const audioFileInputRef = useRef(null);
 
   useEffect(() => {
-    document.title = "Generate Video Course"; // Set the title
+    document.title = "Generate Video Course";
   }, []);
 
   const handleGenerate = async () => {
     setIsLoadingImage(true);
     setGeneratedImage(null);
     try {
-      const response = await fetch('http://137.184.193.15:5000/generate-teacher', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/generate-teacher`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -61,7 +60,7 @@ const GenerateVideoCourse = () => {
     setIsLoadingVoice(true);
     const formData = new FormData(document.getElementById('voice-form'));
     try {
-      const response = await fetch('http://137.184.193.15:5000/generate-voice', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/generate-voice`, {
         method: 'POST',
         body: formData
       });
@@ -141,7 +140,7 @@ const GenerateVideoCourse = () => {
       audioFileData,
     };
 
-    const response = await fetch('http://137.184.193.15:5000/generate-avatar', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/generate-avatar`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -163,8 +162,7 @@ const GenerateVideoCourse = () => {
 
   return (
     <>
-      <Header />
-      <div className={`${styles.sectionPadding} ${styles.bgCover} ${styles.bgNoRepeat} ${styles.bgCenter} ${styles.minHScreen} ${styles.flex} ${styles.itemsCenter} ${styles.justifyCenter}`} style={{marginTop:"100px"}}>
+      <div className={`${styles.sectionPadding} ${styles.bgCover} ${styles.bgNoRepeat} ${styles.bgCenter} ${styles.minHScreen} ${styles.flex} ${styles.itemsCenter} ${styles.justifyCenter}`} style={{ marginTop: "100px" }}>
         <div className={`${styles.container} ${styles.bgWhite} ${styles.shadowBox5} ${styles.rounded} ${styles.p8}`}>
           <h1 className={`${styles.text3xl} ${styles.fontBold} ${styles.mb6} ${styles.textCenter}`}>Generate Video Course</h1>
 
